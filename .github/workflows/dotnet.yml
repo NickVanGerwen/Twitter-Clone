@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 7.0.x
     
     - name: Restore dependencies
       run: dotnet restore
@@ -24,7 +24,7 @@ jobs:
 
     - name: Build
       run: dotnet build --no-restore
-      working-directory: src/twitter-post-service
+      working-directory: ./twitter-post-service
 
 #   no tests yet    
 #    - name: Test
