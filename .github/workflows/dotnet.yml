@@ -20,7 +20,7 @@ jobs:
     
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: src/twitter-post-service
+      working-directory: ./twitter-post-service
 
     - name: Build
       run: dotnet build --no-restore
