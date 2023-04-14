@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env 
 WORKDIR /src
 
-COPY ["twitter-post-service.csproj", "./"]
+COPY *.csproj ./
 RUN dotnet restore
 
 COPY . ./
