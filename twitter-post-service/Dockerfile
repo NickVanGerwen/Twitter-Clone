@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env 
-WORKDIR /twitter-post-service
+WORKDIR /src
 
 COPY ["twitter-post-service.csproj", "./"]
 RUN dotnet restore
@@ -9,6 +9,6 @@ RUN dotnet build
 RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
-WORKDIR /twitter-post-service
+WORKDIR /src
 COPY --from=build-env /app/out .
 ENTRYPOINT [ "dotnet", "twitter-post-service.dll" ]
