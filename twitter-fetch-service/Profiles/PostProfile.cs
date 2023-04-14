@@ -6,7 +6,7 @@ namespace twitter_post_service.Profiles
     {
         public PostProfile()
         {
-            CreateMap<DTOs.PostCreateDTO, Models.Post>();
+            CreateMap<Models.Post, DTOs.PostReadDTO>();
         }
     }
 }

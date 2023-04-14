@@ -4,8 +4,8 @@ namespace twitter_post_service.Data
 {
     public interface IPostRepo
     {
-        void CreatePost(Post post);
-        void DeletePost(Post post);
+        IEnumerable<Post> GetAllPosts();
+        Post GetPostById(int id);
         bool SaveChanges();
     }
 }

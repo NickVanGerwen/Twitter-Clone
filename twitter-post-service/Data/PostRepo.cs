@@ -21,7 +21,6 @@ namespace twitter_post_service.Data
             }
             else
                 throw new ArgumentNullException(nameof(post));
-
         }
 
         public void DeletePost(Post post)
@@ -33,16 +32,6 @@ namespace twitter_post_service.Data
             }
             else
                 throw new ArgumentNullException(nameof(post));
-        }
-
-        public IEnumerable<Post> GetAllPosts()
-        {
-            return _context.Posts.ToList();
-        }
-
-        public Post GetPostById(int id)
-        {
-            return _context.Posts.FirstOrDefault(p => p.Id == id);
         }
 
         public bool SaveChanges()
