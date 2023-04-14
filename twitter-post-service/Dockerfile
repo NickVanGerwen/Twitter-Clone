@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env 
-WORKDIR /src/twitter-post-service
+WORKDIR /src
 
 COPY twitter-post-service.csproj ./
 RUN dotnet restore
