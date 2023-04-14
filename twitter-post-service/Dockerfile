@@ -1,10 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env 
-WORKDIR /app
+WORKDIR /app/restore twitter-post-service
 
 # COPY twitter-post-service/twitter-post-service.csproj ./
 
 COPY . ./
-RUN dotnet restore twitter-post-service/twitter-post-service.csproj
+RUN dotnet restore twitter-post-service.csproj
 RUN dotnet build
 RUN dotnet publish -c Release -o out
 
