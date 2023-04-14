@@ -4,7 +4,7 @@ WORKDIR /app
 # COPY twitter-post-service/twitter-post-service.csproj ./
 
 COPY . ./
-RUN dotnet restore
+RUN dotnet restore twitter-post-service/twitter-post-service.csproj
 RUN dotnet build
 RUN dotnet publish -c Release -o out
 
