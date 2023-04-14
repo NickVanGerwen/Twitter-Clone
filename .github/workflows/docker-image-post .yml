@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build ./twitter-post-service/ --file Dockerfile --tag twitter-post-service:$(date +%s)
+      run: docker build -f twitter-post-service/Dockerfile . -t twitter-post-service:$(date +%s)
