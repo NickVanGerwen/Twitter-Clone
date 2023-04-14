@@ -19,7 +19,7 @@ namespace twitter_post_service.Controllers
         }
 
         [HttpPost]
-        public ActionResult<PostReadDTO> CreatePost(PostCreateDTO postCreateDTO)
+        public ActionResult CreatePost(PostCreateDTO postCreateDTO)
         {
             var postModel = _mapper.Map<Post>(postCreateDTO);
             _repo.CreatePost(postModel);
