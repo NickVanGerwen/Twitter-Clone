@@ -1,4 +1,4 @@
-name: Docker Image CI fetch
+name: Docker Image Fetch
 
 on:
   push:

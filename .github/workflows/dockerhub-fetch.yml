@@ -1,4 +1,4 @@
-name: Docker Image CD
+name: Docker CD Fetch
 
 on:
   push:
