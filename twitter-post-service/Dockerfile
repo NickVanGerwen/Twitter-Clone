@@ -6,7 +6,7 @@ RUN dotnet restore ./twitter-post-service/
 
 COPY . .
 RUN dotnet build ./twitter-post-service/
-RUN dotnet publish -c Release -o out
+RUN dotnet publish ./twitter-post-service/ -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
