@@ -5,7 +5,7 @@ COPY twitter-post-service/twitter-post-service.csproj ./twitter-post-service/
 RUN dotnet restore ./twitter-post-service/
 
 COPY . .
-RUN dotnet build
+RUN dotnet build ./twitter-post-service/
 RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
