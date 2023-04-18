@@ -1,4 +1,4 @@
-name: Docker CD Fetch
+name: Dockerhub CD Fetch
 
 on:
   push:
