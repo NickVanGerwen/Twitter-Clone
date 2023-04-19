@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: twitter-depl
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: twitter
+  template:
+    metadata:
+      labels:
+        app: twitter
+    spec:
+      containers:
+        - name: platformservice
+          image: nickvgdev/twitter-post-service:latest
+  
