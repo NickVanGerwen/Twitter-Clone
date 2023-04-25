@@ -13,6 +13,10 @@ spec:
         app: twitter
     spec:
       containers:
-        - name: platformservice
+        - name: twitter-post-service
           image: nickvgdev/twitter-post-service:latest
+        - name: twitter-fetch-service
+          image: nickvgdev/twitter-fetch-service:latest
+        - name: twitter-rabbit
+          image: rabbitmq:3-management
   
