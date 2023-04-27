@@ -5,7 +5,7 @@ using twitter_post_service.DTOs;
 
 namespace twitter_fetch_service.Controllers
 {
-    [Route("api/posts")]
+    [Route("api/fetch")]
     [ApiController]
     public class FetchController : ControllerBase
     {
