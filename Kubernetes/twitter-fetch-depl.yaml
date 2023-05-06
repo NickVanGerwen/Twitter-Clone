@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: twitter-fetch-depl
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: twitter-fetch
+  template:
+    metadata:
+      labels:
+        app: twitter-fetch
+    spec:
+      containers:
+        - name: twitter-fetch-service
+          image: nickvgdev/twitter-fetch-service:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: twitter-fetch-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: twitter-fetch
+  ports:
+    - name: fetch
+      protocol: TCP
+      port: 80
+      targetPort: 80
