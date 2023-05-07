@@ -25,7 +25,7 @@ namespace twitter_fetch_service.Rabbitmq
             _serviceScopeFactory = serviceScopeFactory;
             connectionFactory = new ConnectionFactory
             {
-                HostName = "localhost",
+                HostName = "twitterbutcooler",
                 Port = 5672,
                 UserName = "guest",
                 Password = "guest"
