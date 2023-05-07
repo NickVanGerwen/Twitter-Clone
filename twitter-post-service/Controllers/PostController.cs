@@ -22,10 +22,10 @@ namespace twitter_post_service.Controllers
         [HttpPost]
         public ActionResult CreatePost(PostCreateDTO postCreateDTO)
         {
-            //postCreateDTO.Date = DateTime.Now;
-            //RabbitmqPublisher rabbitmqPublisher = new RabbitmqPublisher();
-            //rabbitmqPublisher.Publish(postCreateDTO);
-            //var postModel = _mapper.Map<Post>(postCreateDTO);
+            postCreateDTO.Date = DateTime.Now;
+            RabbitmqPublisher rabbitmqPublisher = new RabbitmqPublisher();
+            rabbitmqPublisher.Publish(postCreateDTO);
+            var postModel = _mapper.Map<Post>(postCreateDTO);
             //_repo.CreatePost(postModel);
             //_repo.SaveChanges();
             return Ok();
