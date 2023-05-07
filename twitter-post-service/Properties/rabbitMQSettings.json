@@ -4,7 +4,7 @@
   },
   "RabbitMQ": {
     "Port": "5672",
-    "Hostname": "twitterbutcooler",
+    "Hostname": "twitterbutcooler.com",
     "Password": "guest",
     "Username": "guest"
   }
