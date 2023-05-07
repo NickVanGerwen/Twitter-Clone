@@ -1,0 +1,11 @@
+﻿{
+  "Logging": {
+    "Level": "Production"
+  },
+  "RabbitMQ": {
+    "Port": "5672",
+    "Hostname": "localhost",
+    "Password": "guest",
+    "Username": "guest"
+  }
+}
