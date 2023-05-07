@@ -5,6 +5,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Diagnostics;
 using System.Text;
+using twitter_post_service.Data;
 using twitter_post_service.Models;
 
 namespace twitter_fetch_service.Rabbitmq
@@ -17,11 +18,11 @@ namespace twitter_fetch_service.Rabbitmq
         RabbitMQ.Client.IModel channel;
         RabbitMQ.Client.IConnection connection;
 
+        public IPostRepo _postRepo;
         private readonly IServiceScopeFactory _serviceScopeFactory;
         public RabbitMQConsumer(IServiceScopeFactory serviceScopeFactory)
         {
             _serviceScopeFactory = serviceScopeFactory;
-
             connectionFactory = new ConnectionFactory
             {
                 HostName = "localhost",
@@ -58,14 +59,21 @@ namespace twitter_fetch_service.Rabbitmq
             string time = postJson["Date"].ToString();
             try
             {
-                PostCreateModel post = new PostCreateModel()
+                Post post = new Post()
                 {
                     Message = (string)postJson["Message"],
                     Author = (string)postJson["Author"],
                     Date = DateTime.Parse(time),
                     Likes = (int)postJson["Likes"]
                 };
-                Console.WriteLine(post);
+
+                using (var scope = _serviceScopeFactory.CreateScope())
+                {
+                    _postRepo = scope.ServiceProvider.GetRequiredService<IPostRepo>();
+                    _postRepo.CreatePost(post);
+                    Console.WriteLine(post);
+                }
+                    Console.WriteLine(post);
             }
             catch (Exception ex) { Console.Write(ex.ToString()); }
         }
