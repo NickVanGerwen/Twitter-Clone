@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 function App() {
+    const post = { message: 'cool opinion online', author: 'cool guy', date: '2021-03-01', likes: '0' };
 
   const [posts, setPosts] = useState([]);
 
@@ -17,6 +18,10 @@ function App() {
       });
   }, []);
 
+  const addPost = () => {
+    axios.post('http://twitterbutcooler.com/api/posts', post).then(response => {console.log(response)}).catch(error => {console.error(error)});
+    console.log("post added");
+  }
 
   return (
     <div className="App">
@@ -48,7 +53,9 @@ function App() {
           ))}
         </tbody>
       </table>
+      <button onClick={() => addPost()} type="button" class="btn btn-primary">NEW POST</button>
     </div>
+
   );
 }
 
