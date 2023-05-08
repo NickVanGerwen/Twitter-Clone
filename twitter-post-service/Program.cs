@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using twitter_post_service.Data;
+using twitter_post_service.Rabbitmq;
 
 var builder = WebApplication.CreateBuilder(args);
 

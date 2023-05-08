@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System.Security.Cryptography.Xml;
 using twitter_post_service.Data;
 using twitter_post_service.DTOs;
 using twitter_post_service.Models;
@@ -13,7 +16,9 @@ namespace twitter_post_service.Controllers
     {
         readonly IPostRepo _repo;
         readonly IMapper _mapper;
-        public PostController(IPostRepo repo, IMapper mapper)
+        private readonly IServiceScopeFactory _serviceScopeFactory;
+
+        public PostController(IPostRepo repo, IMapper mapper, IServiceScopeFactory serviceScopeFactory)
         {
             _repo = repo;
             _mapper = mapper;
