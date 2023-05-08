@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using twitter_post_service.Data;
 using twitter_post_service.DTOs;
 using twitter_post_service.Models;
-using twitter_post_service.RabbitMQ;
+using twitter_post_service.Rabbitmq;
 
 namespace twitter_post_service.Controllers
 {
@@ -22,13 +22,20 @@ namespace twitter_post_service.Controllers
         [HttpPost]
         public ActionResult CreatePost(PostCreateDTO postCreateDTO)
         {
-            postCreateDTO.Date = DateTime.Now;
-            RabbitmqPublisher rabbitmqPublisher = new RabbitmqPublisher();
-            //rabbitmqPublisher.Publish(postCreateDTO);
-            var postModel = _mapper.Map<Post>(postCreateDTO);
-            _repo.CreatePost(postModel);
-            _repo.SaveChanges();
+            try
+            {
+                postCreateDTO.Date = DateTime.Now;
+                RabbitmqPublisher rabbitmqPublisher = new RabbitmqPublisher();
+                rabbitmqPublisher.Publish(postCreateDTO);
+                var postModel = _mapper.Map<Post>(postCreateDTO);
+                _repo.CreatePost(postModel);
+                _repo.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
             return Ok();
-        } 
+        }
     }
 }

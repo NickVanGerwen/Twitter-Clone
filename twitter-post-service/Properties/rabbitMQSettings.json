@@ -4,7 +4,8 @@
   },
   "RabbitMQ": {
     "Port": "5672",
-    "Hostname": "rabbitmq-clusterip-srv",
+    "Hostname": "localhost",
+    //"Hostname": "rabbitmq-clusterip-srv",
     "Password": "guest",
     "Username": "guest"
   }

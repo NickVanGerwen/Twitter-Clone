@@ -6,7 +6,7 @@ using System.Text;
 using twitter_post_service.DTOs;
 using twitter_post_service.Models;
 
-namespace twitter_post_service.RabbitMQ
+namespace twitter_post_service.Rabbitmq
 {
     public class RabbitmqPublisher
     {
