@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using twitter_fetch_service.Rabbitmq;
 using twitter_post_service.Data;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,8 +12,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+IConfiguration Configuration = builder.Configuration;
+
+
 builder.Services.AddDbContext<AppDbContext>(opt =>
-opt.UseInMemoryDatabase("InMemory"));
+opt.UseSqlServer(Configuration.GetConnectionString("PostsConnection")));
+
+//builder.Services.AddDbContext<AppDbContext>(opt =>
+//opt.UseInMemoryDatabase("InMemory"));
 
 builder.Services.AddHostedService<RabbitMQConsumer>();
 
