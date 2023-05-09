@@ -20,8 +20,16 @@ namespace twitter_fetch_service.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<PostReadDTO>> GetPosts()
         {
-            var postItems = _repo.GetAllPosts();
-            return Ok(_mapper.Map<IEnumerable<PostReadDTO>>(postItems));
+            try
+            {
+                var postItems = _repo.GetAllPosts();
+                return Ok(_mapper.Map<IEnumerable<PostReadDTO>>(postItems));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("---------> " + ex.Message);
+            }
+            return Ok();
         }
 
         [HttpGet("{id}", Name = "GetPostById")]
