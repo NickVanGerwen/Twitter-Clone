@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
     
 builder.Services.AddDbContext<AppDbContext>(opt =>
-opt.UseSqlServer("Server=localhost,1433;Initial Catalog=postsdb;User ID=sa;Password=pa55word;TrustServerCertificate=true", optionsBuilder => optionsBuilder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)));
+opt.UseSqlServer("Server=mssql-clusterip-srv,1433;Initial Catalog=postsdb;User ID=sa;Password=pa55word;TrustServerCertificate=true", optionsBuilder => optionsBuilder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)));
 
 //opt.UseInMemoryDatabase("InMemory"));
 
