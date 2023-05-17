@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 function App() {
-    const post = { message: 'cool opinion online', author: 'cool guy', date: '2021-03-01', likes: '0' };
+    const post = { message: 'my non-controversial opinion', author: 'me', date: '2021-03-01', likes: '0' };
 
   const [posts, setPosts] = useState([]);
 
@@ -42,7 +42,8 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {posts.map(post => (
+          { (posts.length > 0) ? 
+          posts.map(post => (
             <tr key={post.id}>
               <td>{post.id}</td>
               <td>{post.message}</td>
@@ -50,7 +51,10 @@ function App() {
               <td>{post.date}</td>
               <td>{post.likes}</td>
             </tr>
-          ))}
+           ))
+          :
+          <div>fetching tweets...</div>
+          } 
         </tbody>
       </table>
       <button onClick={() => addPost()} type="button" class="btn btn-primary">NEW POST</button>

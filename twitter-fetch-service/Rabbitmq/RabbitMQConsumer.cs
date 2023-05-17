@@ -25,7 +25,8 @@ namespace twitter_fetch_service.Rabbitmq
             _serviceScopeFactory = serviceScopeFactory;
             connectionFactory = new ConnectionFactory
             {
-                HostName = "rabbitmq-clusterip-srv",
+                HostName = "localhost",
+                //HostName = "rabbitmq-clusterip-srv",
                 Port = 5672,
                 UserName = "guest",
                 Password = "guest"
