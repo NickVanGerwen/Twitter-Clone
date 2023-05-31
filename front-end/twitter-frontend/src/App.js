@@ -9,7 +9,7 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://twitterbutcooler.com/api/fetch')
+    axios.get('http://35.205.199.107/api/fetch')
       .then(response => {
         setPosts(response.data);
       })
@@ -19,7 +19,7 @@ function App() {
   }, []);
 
   const addPost = () => {
-    axios.post('http://twitterbutcooler.com/api/posts', post).then(response => {console.log(response)}).catch(error => {console.error(error)});
+    axios.post('http://35.205.199.107/api/posts', post).then(response => {console.log(response)}).catch(error => {console.error(error)});
     console.log("post added");
   }
 
