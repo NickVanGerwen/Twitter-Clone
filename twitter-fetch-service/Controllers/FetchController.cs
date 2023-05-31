@@ -11,8 +11,21 @@ namespace twitter_fetch_service.Controllers
     {
         readonly IPostRepo _repo;
         readonly IMapper _mapper;
+        List<PostReadDTO> postReadDTOs;
         public FetchController(IPostRepo repo, IMapper mapper)
         {
+            postReadDTOs = new List<PostReadDTO>()
+            {
+                new PostReadDTO()
+                {
+                    Id = 1,
+                    Message = "woo a new post!",
+                    Date = DateTime.Now,
+                    Author = "John Bovi",
+                    Likes = 16
+                }
+            };
+
             _repo = repo;
             _mapper = mapper;
         }
@@ -22,8 +35,9 @@ namespace twitter_fetch_service.Controllers
         {
             try
             {
-                var postItems = _repo.GetAllPosts();
-                return Ok(_mapper.Map<IEnumerable<PostReadDTO>>(postItems));
+                return Ok(postReadDTOs);
+                //var postItems = _repo.GetAllPosts();
+                //return Ok(_mapper.Map<IEnumerable<PostReadDTO>>(postItems));
             }
             catch (Exception ex)
             {
