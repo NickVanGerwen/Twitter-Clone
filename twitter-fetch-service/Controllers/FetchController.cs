@@ -35,9 +35,9 @@ namespace twitter_fetch_service.Controllers
         {
             try
             {
-                return Ok(postReadDTOs);
-                //var postItems = _repo.GetAllPosts();
-                //return Ok(_mapper.Map<IEnumerable<PostReadDTO>>(postItems));
+                //return Ok(postReadDTOs);
+                var postItems = _repo.GetAllPosts();
+                return Ok(_mapper.Map<IEnumerable<PostReadDTO>>(postItems));
             }
             catch (Exception ex)
             {
