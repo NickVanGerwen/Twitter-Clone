@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace twitter_post_service.Profiles
+namespace twitter_fetch_service.Profiles
 {
     public class PostProfile : Profile
     {

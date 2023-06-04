@@ -7,10 +7,11 @@ using System.Diagnostics;
 using System.Text;
 using twitter_fetch_service.Data;
 using twitter_fetch_service.Models;
+using twitter_fetch_service.DTOs;
 
 namespace twitter_fetch_service.Rabbitmq
 {
-    public class RabbitMQConsumer : BackgroundService
+    public class UpdateAccountConsumer : BackgroundService
     {
         //public ICoordinateCollector _collector;
 
@@ -20,7 +21,7 @@ namespace twitter_fetch_service.Rabbitmq
 
         public IPostRepo _postRepo;
         private readonly IServiceScopeFactory _serviceScopeFactory;
-        public RabbitMQConsumer(IServiceScopeFactory serviceScopeFactory)
+        public UpdateAccountConsumer(IServiceScopeFactory serviceScopeFactory)
         {
             _serviceScopeFactory = serviceScopeFactory;
             connectionFactory = new ConnectionFactory
@@ -34,13 +35,11 @@ namespace twitter_fetch_service.Rabbitmq
             connection = connectionFactory.CreateConnection();
             channel = connection.CreateModel();
 
-            channel.ExchangeDeclare("PostCreationExchange", ExchangeType.Topic, true, false, null);
-            channel.QueueDeclare("PostCreationQueue",
-                durable: true,
-                exclusive: false,
-                autoDelete: false,
-                arguments: null);
-            channel.QueueBind("PostCreationQueue", "PostCreationExchange", "PostCreation.Created.*");
+            channel.ExchangeDeclare("AccountUpdateExchange", ExchangeType.Topic, true, false, null);
+            var queue = channel.QueueDeclare().QueueName;
+            channel.QueueBind(queue, "AccountUpdateExchange", string.Empty);
+
+            Console.WriteLine("----> " + queue);
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -57,24 +56,23 @@ namespace twitter_fetch_service.Rabbitmq
             byte[] body = e.Body.ToArray();
             string payload = Encoding.UTF8.GetString(body);
             JObject postJson = JObject.Parse(payload);
-            string time = postJson["Date"].ToString();
             try
             {
-                Post post = new Post()
+                AccountUpdateDto account = new AccountUpdateDto
                 {
-                    Message = (string)postJson["Message"],
-                    Author = (string)postJson["Author"],
-                    Date = DateTime.Parse(time),
-                    Likes = (int)postJson["Likes"]
+                    Id = (int)postJson["Id"],
+                    Name = (string)postJson["Name"],
+                    Email = (string)postJson["Email"]
                 };
 
                 using (var scope = _serviceScopeFactory.CreateScope())
                 {
                     _postRepo = scope.ServiceProvider.GetRequiredService<IPostRepo>();
-                    _postRepo.CreatePost(post);
-                    Console.WriteLine(post);
+                    //update account
+                    //_postRepo.CreatePost(post);
+                    //Console.WriteLine(post);
                 }
-                    Console.WriteLine(post);
+                //Console.WriteLine(post);
             }
             catch (Exception ex) { Console.Write(ex.ToString()); }
         }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace twitter_post_service.Models
+namespace twitter_fetch_service.Models
 {
     public class PostCreateModel
     {

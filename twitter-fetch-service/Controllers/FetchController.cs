@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using twitter_post_service.Data;
-using twitter_post_service.DTOs;
+using twitter_fetch_service.Data;
+using twitter_fetch_service.DTOs;
 
 namespace twitter_fetch_service.Controllers
 {

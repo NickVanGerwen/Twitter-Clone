@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using twitter_post_service.Models;
+using twitter_fetch_service.Models;
 
-namespace twitter_post_service.Data
+namespace twitter_fetch_service.Data
 {
     public class PostRepo : IPostRepo
     {

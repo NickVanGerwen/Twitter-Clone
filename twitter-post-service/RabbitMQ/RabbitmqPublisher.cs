@@ -14,7 +14,6 @@ namespace twitter_post_service.Rabbitmq
 {
     public class RabbitmqPublisher
     {
-        RabbitServer rabbitServer;
         RabbitMQ.Client.IConnectionFactory connectionFactory;
         RabbitMQ.Client.IModel channel;
         RabbitMQ.Client.IConnection connection;

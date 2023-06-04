@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace twitter_post_service.Data
+namespace twitter_fetch_service.Data
 {
     public class AppDbContext : DbContext
     {

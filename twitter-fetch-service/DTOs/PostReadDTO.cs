@@ -1,4 +1,4 @@
-﻿namespace twitter_post_service.DTOs
+﻿namespace twitter_fetch_service.DTOs
 {
     public class PostReadDTO
     {

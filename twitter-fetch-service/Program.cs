@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using twitter_fetch_service.Rabbitmq;
-using twitter_post_service.Data;
+using twitter_fetch_service.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +20,7 @@ opt.UseSqlServer("Server=mssql-clusterip-srv,1433;Initial Catalog=postsdb;User I
 
 
 builder.Services.AddHostedService<RabbitMQConsumer>();
+builder.Services.AddHostedService<UpdateAccountConsumer>();
 
 builder.Services.AddScoped<IPostRepo, PostRepo>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
