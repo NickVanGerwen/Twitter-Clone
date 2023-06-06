@@ -17,7 +17,7 @@ namespace twitter_account_service.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateAccount(AccountUpdateDto account)
+        public IActionResult UpdateAccount(AccountDto account)
         {
             UpdatePublisher rabbitmqPublisher = new UpdatePublisher();
             rabbitmqPublisher.Publish(account);

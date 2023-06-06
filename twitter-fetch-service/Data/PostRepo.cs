@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using twitter_fetch_service.DTOs;
 using twitter_fetch_service.Models;
 
 namespace twitter_fetch_service.Data
@@ -35,6 +37,46 @@ namespace twitter_fetch_service.Data
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
+        }
+
+        public void UpdateUsername(AccountUpdateDto account)
+        {
+            bool containsPostsOfAuthor = true;
+            if (!account.NewName.IsNullOrEmpty())
+            {
+                while (containsPostsOfAuthor)
+                {
+                    if (!_context.Posts.Any(p => p.Author == account.OldName))
+                    {
+                        containsPostsOfAuthor = false;
+                    }
+                    else
+                    {
+                        _context.Posts.First(p => p.Author == account.OldName).Author = account.NewName;
+                        _context.SaveChanges();
+                    }
+                }
+            }
+        }
+
+        public void DeleteUser(string Username)
+        {
+            bool containsPostsOfAuthor = true;
+            if (!Username.IsNullOrEmpty())
+            {
+                while (containsPostsOfAuthor)
+                {
+                    if (!_context.Posts.Any(p => p.Author == Username))
+                    {
+                        containsPostsOfAuthor = false;
+                    }
+                    else
+                    {
+                        _context.Posts.First(p => p.Author == Username).Author = "[Deleted]";
+                        _context.SaveChanges();
+                    }
+                }
+            }
         }
     }
 }

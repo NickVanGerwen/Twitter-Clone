@@ -21,6 +21,7 @@ opt.UseSqlServer("Server=mssql-clusterip-srv,1433;Initial Catalog=postsdb;User I
 
 builder.Services.AddHostedService<RabbitMQConsumer>();
 builder.Services.AddHostedService<UpdateAccountConsumer>();
+builder.Services.AddHostedService<DeleteAccountConsumer>();
 
 builder.Services.AddScoped<IPostRepo, PostRepo>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

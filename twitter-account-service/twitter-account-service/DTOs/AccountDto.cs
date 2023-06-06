@@ -2,12 +2,11 @@
 
 namespace twitter_account_service.DTOs
 {
-    public class AccountUpdateDto
+    public class AccountDto
     {
         [Required]
         public int Id { get; set;}
-        public string NewName { get; set; } 
-        public string OldName { get; set; } 
+        public string Name { get; set; }
         public string Email { get; set; }
     }
 }

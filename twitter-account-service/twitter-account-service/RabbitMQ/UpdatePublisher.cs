@@ -19,8 +19,8 @@ namespace twitter_account_service.Rabbitmq
         {
             connectionFactory = new ConnectionFactory
             {
-                //HostName = "rabbitmq-clusterip-srv",
-                HostName = "localhost",
+                //HostName = "localhost",
+                HostName = "rabbitmq-clusterip-srv",
                 Port = 5672,
                 UserName = "guest",
                 Password = "guest"
@@ -28,17 +28,17 @@ namespace twitter_account_service.Rabbitmq
             connection = connectionFactory.CreateConnection();
             channel = connection.CreateModel();
 
-            //create and bind queues
-            var queue = channel.QueueDeclare();
-            var queue1 = channel.QueueDeclare();
-            channel.QueueBind(queue, "AccountUpdateExchange", string.Empty);
-            channel.QueueBind(queue1, "AccountUpdateExchange", string.Empty);
-
             channel.ExchangeDeclare("AccountUpdateExchange", ExchangeType.Fanout, true, false, null);
         }
 
-        public void Publish(AccountUpdateDto accountUpdate)
+        public void Publish(AccountDto account)
         {
+            AccountUpdateDto accountUpdate = new AccountUpdateDto();
+            //get oldname using id
+            accountUpdate.OldName = "me";
+            accountUpdate.NewName = account.Name;
+            accountUpdate.Email = account.Email;
+
             var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(accountUpdate));
             channel.BasicPublish(
                                 exchange: "AccountUpdateExchange",

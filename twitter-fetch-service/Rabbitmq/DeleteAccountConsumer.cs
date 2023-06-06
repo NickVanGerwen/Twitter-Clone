@@ -11,7 +11,7 @@ using twitter_fetch_service.DTOs;
 
 namespace twitter_fetch_service.Rabbitmq
 {
-    public class UpdateAccountConsumer : BackgroundService
+    public class DeleteAccountConsumer : BackgroundService
     {
         //public ICoordinateCollector _collector;
 
@@ -22,7 +22,7 @@ namespace twitter_fetch_service.Rabbitmq
         public IPostRepo _postRepo;
         private readonly IServiceScopeFactory _serviceScopeFactory;
         string queue;
-        public UpdateAccountConsumer(IServiceScopeFactory serviceScopeFactory)
+        public DeleteAccountConsumer(IServiceScopeFactory serviceScopeFactory)
         {
             _serviceScopeFactory = serviceScopeFactory;
             connectionFactory = new ConnectionFactory
@@ -36,11 +36,11 @@ namespace twitter_fetch_service.Rabbitmq
             connection = connectionFactory.CreateConnection();
             channel = connection.CreateModel();
 
-            channel.ExchangeDeclare("AccountUpdateExchange", ExchangeType.Fanout, true, false, null);
+            channel.ExchangeDeclare("AccountDeleteExchange", ExchangeType.Fanout, true, false, null);
             queue = channel.QueueDeclare().QueueName;
-            channel.QueueBind(queue, "AccountUpdateExchange", string.Empty);
+            channel.QueueBind(queue, "AccountDeleteExchange", string.Empty);
 
-            Console.WriteLine("----> " + queue);
+            Console.WriteLine("----> queue created: " + queue);
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -51,8 +51,8 @@ namespace twitter_fetch_service.Rabbitmq
 
                 consumer.Received += Consumer_Received;
                 channel.BasicConsume(queue, true, consumer);
-
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
@@ -61,26 +61,14 @@ namespace twitter_fetch_service.Rabbitmq
         private void Consumer_Received(object? sender, BasicDeliverEventArgs e)
         {
             byte[] body = e.Body.ToArray();
-            string payload = Encoding.UTF8.GetString(body);
-            JObject postJson = JObject.Parse(payload);
-            try
+            string Username = Encoding.UTF8.GetString(body);
+            using (var scope = _serviceScopeFactory.CreateScope())
             {
-                AccountUpdateDto account = new AccountUpdateDto
-                {
-                    Id = (int)postJson["Id"],
-                    NewName = (string)postJson["NewName"],
-                    OldName = (string)postJson["OldName"],
-                };
-
-                using (var scope = _serviceScopeFactory.CreateScope())
-                {
-                    _postRepo = scope.ServiceProvider.GetRequiredService<IPostRepo>();
-                    //update account
-                    _postRepo.UpdateUsername(account);
-                    Console.WriteLine("Account Updated: "+ account);
-                }
+                _postRepo = scope.ServiceProvider.GetRequiredService<IPostRepo>();
+                //update account
+                _postRepo.DeleteUser(Username);
+                Console.WriteLine("Account deleted: " + Username);
             }
-            catch (Exception ex) { Console.Write(ex.ToString()); }
         }
     }
 }

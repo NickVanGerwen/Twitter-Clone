@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace twitter_fetch_service.DTOs
+namespace twitter_post_service.DTOs
 {
     public class AccountUpdateDto
     {

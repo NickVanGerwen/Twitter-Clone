@@ -5,11 +5,12 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Diagnostics;
 using System.Text;
-using twitter_fetch_service.Data;
-using twitter_fetch_service.Models;
-using twitter_fetch_service.DTOs;
+using twitter_post_service.Data;
+using twitter_post_service.Models;
+using twitter_post_service.DTOs;
+using twitter_post_service.DTOs;
 
-namespace twitter_fetch_service.Rabbitmq
+namespace twitter_post_service.Rabbitmq
 {
     public class UpdateAccountConsumer : BackgroundService
     {
@@ -27,8 +28,8 @@ namespace twitter_fetch_service.Rabbitmq
             _serviceScopeFactory = serviceScopeFactory;
             connectionFactory = new ConnectionFactory
             {
-                //HostName = "localhost",
-                HostName = "rabbitmq-clusterip-srv",
+                HostName = "localhost",
+                //HostName = "rabbitmq-clusterip-srv",
                 Port = 5672,
                 UserName = "guest",
                 Password = "guest"
