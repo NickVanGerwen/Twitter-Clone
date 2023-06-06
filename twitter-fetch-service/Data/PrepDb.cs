@@ -1,5 +1,5 @@
-﻿using twitter_post_service.Models;
-namespace twitter_post_service.Data
+﻿using twitter_fetch_service.Models;
+namespace twitter_fetch_service.Data
 {
     public static class PrepDb
     {

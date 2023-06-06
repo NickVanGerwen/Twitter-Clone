@@ -1,5 +1,4 @@
-﻿using CarTrackerProducer.Models;
-using Microsoft.AspNetCore.Connections;
+﻿using Microsoft.AspNetCore.Connections;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -14,7 +13,6 @@ namespace twitter_post_service.Rabbitmq
 {
     public class RabbitmqPublisher
     {
-        RabbitServer rabbitServer;
         RabbitMQ.Client.IConnectionFactory connectionFactory;
         RabbitMQ.Client.IModel channel;
         RabbitMQ.Client.IConnection connection;

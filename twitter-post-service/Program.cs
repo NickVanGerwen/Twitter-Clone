@@ -18,6 +18,8 @@ opt.UseInMemoryDatabase("InMemory"));
 builder.Services.AddScoped<IPostRepo, PostRepo>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddHostedService<UpdateAccountConsumer>();
+builder.Services.AddHostedService<DeleteAccountConsumer>();
 
 var app = builder.Build();
 
@@ -27,6 +29,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 

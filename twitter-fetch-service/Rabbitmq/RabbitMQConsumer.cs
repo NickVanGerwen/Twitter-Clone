@@ -5,8 +5,8 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Diagnostics;
 using System.Text;
-using twitter_post_service.Data;
-using twitter_post_service.Models;
+using twitter_fetch_service.Data;
+using twitter_fetch_service.Models;
 
 namespace twitter_fetch_service.Rabbitmq
 {
