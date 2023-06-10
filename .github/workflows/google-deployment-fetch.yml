@@ -46,7 +46,7 @@ jobs:
       with:
         token_format: 'access_token'
         workload_identity_provider: 'principalSet://iam.googleapis.com/projects/51038860699/locations/global/workloadIdentityPools/twitter-pool/*'
-        service_account: '51038860699-compute@developer.gserviceaccount.com'
+        service_account: 'github-actions-service-account@shaped-timing-388308.iam.gserviceaccount.com'
 
     # Alternative option - authentication via credentials json
     # - id: 'auth'
