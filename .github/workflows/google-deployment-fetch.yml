@@ -45,7 +45,7 @@ jobs:
       uses: 'google-github-actions/auth@v0'
       with:
         token_format: 'access_token'
-        workload_identity_provider: 'projects/51038860699/locations/global/workloadIdentityPools/twitter-pool/providers/githubaction'
+        workload_identity_provider: 'projects/51038860699/locations/global/workloadIdentityPools/twitter-pool/providers/dasdasdas'
         service_account: 'github-actions-service-account@shaped-timing-388308.iam.gserviceaccount.com'
 
     # Alternative option - authentication via credentials json
