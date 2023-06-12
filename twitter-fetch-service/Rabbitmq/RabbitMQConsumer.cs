@@ -22,25 +22,30 @@ namespace twitter_fetch_service.Rabbitmq
         private readonly IServiceScopeFactory _serviceScopeFactory;
         public RabbitMQConsumer(IServiceScopeFactory serviceScopeFactory)
         {
-            _serviceScopeFactory = serviceScopeFactory;
-            connectionFactory = new ConnectionFactory
+            try
             {
-                //HostName = "localhost",
-                HostName = "twitter-rabbit-87dtk",
-                Port = 5672,
-                UserName = "guest",
-                Password = "guest"
-            };
-            connection = connectionFactory.CreateConnection();
-            channel = connection.CreateModel();
 
-            channel.ExchangeDeclare("PostCreationExchange", ExchangeType.Topic, true, false, null);
-            channel.QueueDeclare("PostCreationQueue",
-                durable: true,
-                exclusive: false,
-                autoDelete: false,
-                arguments: null);
-            channel.QueueBind("PostCreationQueue", "PostCreationExchange", "PostCreation.Created.*");
+                _serviceScopeFactory = serviceScopeFactory;
+                connectionFactory = new ConnectionFactory
+                {
+                    //HostName = "localhost",
+                    HostName = "twitter-rabbit-87dtk",
+                    Port = 5672,
+                    UserName = "guest",
+                    Password = "guest"
+                };
+                connection = connectionFactory.CreateConnection();
+                channel = connection.CreateModel();
+
+                channel.ExchangeDeclare("PostCreationExchange", ExchangeType.Topic, true, false, null);
+                channel.QueueDeclare("PostCreationQueue",
+                    durable: true,
+                    exclusive: false,
+                    autoDelete: false,
+                    arguments: null);
+                channel.QueueBind("PostCreationQueue", "PostCreationExchange", "PostCreation.Created.*");
+            }
+            catch (Exception ex) { Console.WriteLine("----> " + ex.ToString()); }
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -74,7 +79,7 @@ namespace twitter_fetch_service.Rabbitmq
                     _postRepo.CreatePost(post);
                     Console.WriteLine(post);
                 }
-                    Console.WriteLine(post);
+                Console.WriteLine(post);
             }
             catch (Exception ex) { Console.Write(ex.ToString()); }
         }

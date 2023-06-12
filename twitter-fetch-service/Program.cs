@@ -35,6 +35,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+Console.WriteLine("NEW BUILD WOOOOOOO -----------------------");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
