@@ -50,10 +50,15 @@ namespace twitter_fetch_service.Rabbitmq
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += Consumer_Received;
-            channel.BasicConsume("PostCreationQueue", true, consumer);
+            try
+            {
 
+                var consumer = new EventingBasicConsumer(channel);
+                consumer.Received += Consumer_Received;
+                channel.BasicConsume("PostCreationQueue", true, consumer);
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             return Task.CompletedTask;
         }
         private void Consumer_Received(object? sender, BasicDeliverEventArgs e)
@@ -81,7 +86,7 @@ namespace twitter_fetch_service.Rabbitmq
                 }
                 Console.WriteLine(post);
             }
-            catch (Exception ex) { Console.Write(ex.ToString()); }
+            catch (Exception ex) { Console.Write("[X] rabbit failed: " + ex.ToString()); }
         }
     }
 }
