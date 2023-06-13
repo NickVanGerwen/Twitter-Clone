@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './NewPostPage.css';
+import KeyCloakService from '../security/KeycloakService.tsx';
 
 function NewPostPage() {
   const [message, setMessage] = useState('');
-  const post = { message: 'cool opinion online', author: 'cool guy', date: '2021-03-01', likes: '0' };
-
-
+  
+  
   const addPost = () => {
     console.log("post added: " + message);
-
-    axios.post('http://35.205.199.107/api/posts', post).then(response => {console.log(response)}).catch(error => {console.error(error)});
-    console.log("post added: " + message);
+    const post = { message: message, author: KeyCloakService.GetUserName(), date: '2021-03-01', likes: '0' };
+    console.log(post);
+    axios.post('https://localhost:7237/api/posts', post).then(response => {console.log(response)}).catch(error => {console.error(error)});
+    // //axios.post('http://35.205.199.107/api/posts', post).then(response => {console.log(response)}).catch(error => {console.error(error)});
+    // //axios.post('http://twitterbutcooler.com/api/posts', post).then(response => {console.log(response)}).catch(error => {console.error(error)});
+    // console.log("post added: " + message);
   }
-
+  
   return (
     <div className='FormContainer'>
       <head>
@@ -25,13 +28,11 @@ function NewPostPage() {
           <input onChange={(e) => setMessage(e.target.value)}  className="form-control"  placeholder="What's on your mind?" />
           <small id="emailHelp" className="form-text text-muted">Leave a message for your followers.</small>
         </div>
-        {/* <div className="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input onChange={(e) => setPassword(e.target.value)} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-        </div> */}
-        <button  onClick={() => addPost()} type="submit" className="btn btn-primary">Submit</button>
       </form>
+        <button  onClick={() => addPost()} type="submit" className="btn btn-primary">Submit</button>
     </div>
   );
 }
+
+
  export default NewPostPage;
