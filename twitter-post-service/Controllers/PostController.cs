@@ -16,7 +16,6 @@ namespace twitter_post_service.Controllers
     {
         readonly IPostRepo _repo;
         readonly IMapper _mapper;
-        private readonly IServiceScopeFactory _serviceScopeFactory;
 
         public PostController(IPostRepo repo, IMapper mapper, IServiceScopeFactory serviceScopeFactory)
         {

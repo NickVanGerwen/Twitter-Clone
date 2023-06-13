@@ -23,23 +23,24 @@ namespace twitter_fetch_service.Controllers
                     Date = DateTime.Now,
                     Author = "John Bovi",
                     Likes = 16
-                },               
-                new PostReadDTO()
-                {
-                    Id = 1,
-                    Message = "another post by john!",
-                    Date = DateTime.Now,
-                    Author = "John Bovi",
-                    Likes = 3
-                },                
-                new PostReadDTO()
-                {
-                    Id = 1,
-                    Message = "my opinion matters",
-                    Date = DateTime.Now,
-                    Author = "Frederik1983",
-                    Likes = 376
-                },
+                }
+                //,               
+                //new PostReadDTO()
+                //{
+                //    Id = 1,
+                //    Message = "another post by john!",
+                //    Date = DateTime.Now,
+                //    Author = "John Bovi",
+                //    Likes = 3
+                //},                
+                //new PostReadDTO()
+                //{
+                //    Id = 1,
+                //    Message = "my opinion matters",
+                //    Date = DateTime.Now,
+                //    Author = "Frederik1983",
+                //    Likes = 376
+                //},
 
             };
 
@@ -52,9 +53,9 @@ namespace twitter_fetch_service.Controllers
         {
             try
             {
-                return Ok(postReadDTOs);
-                //var postItems = _repo.GetAllPosts();
-                //return Ok(_mapper.Map<IEnumerable<PostReadDTO>>(postItems));
+                //return Ok(postReadDTOs);
+                var postItems = _repo.GetAllPosts();
+                return Ok(_mapper.Map<IEnumerable<PostReadDTO>>(postItems));
             }
             catch (Exception ex)
             {

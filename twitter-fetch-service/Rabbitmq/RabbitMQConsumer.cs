@@ -30,6 +30,7 @@ namespace twitter_fetch_service.Rabbitmq
                 {
                     //HostName = "localhost",
                     HostName = "twitter-rabbit-87dtk",
+                    //HostName = "twitter-rabbit-87dtk",
                     Port = 5672,
                     UserName = "guest",
                     Password = "guest"
