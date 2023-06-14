@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using twitter_fetch_service.Data;
 using twitter_fetch_service.DTOs;
@@ -6,6 +8,7 @@ using twitter_fetch_service.DTOs;
 namespace twitter_fetch_service.Controllers
 {
     [Route("api/fetch")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class FetchController : ControllerBase
     {

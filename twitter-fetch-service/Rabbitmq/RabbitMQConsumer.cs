@@ -29,8 +29,8 @@ namespace twitter_fetch_service.Rabbitmq
                 connectionFactory = new ConnectionFactory
                 {
                     //HostName = "localhost",
-                    HostName = "twitter-rabbit-87dtk",
                     //HostName = "twitter-rabbit-87dtk",
+                    HostName = "twitter-rabbit-87dtk",
                     Port = 5672,
                     UserName = "guest",
                     Password = "guest"
