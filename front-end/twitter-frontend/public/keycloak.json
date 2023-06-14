@@ -1,7 +1,7 @@
 {
   "realm": "twitter-realm",
   "auth-server-url": "http://35.187.90.81:8080/",
-  "ssl-required": "external",
+  "ssl-required": "none",
   "resource": "twitter",
   "public-client": true,
   "verify-token-audience": true,

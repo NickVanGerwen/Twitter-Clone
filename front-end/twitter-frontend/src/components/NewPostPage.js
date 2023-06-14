@@ -3,20 +3,27 @@ import axios from 'axios';
 import './NewPostPage.css';
 import KeyCloakService from '../security/KeycloakService.tsx';
 
+
 function NewPostPage() {
   const [message, setMessage] = useState('');
-  
-  
+
+
+
   const addPost = () => {
-    console.log("post added: " + message);
-    const post = { message: message, author: KeyCloakService.GetUserName(), date: '2021-03-01', likes: '0' };
-    console.log(post);
-    axios.post('https://localhost:7237/api/posts', post).then(response => {console.log(response)}).catch(error => {console.error(error)});
-    // //axios.post('http://35.205.199.107/api/posts', post).then(response => {console.log(response)}).catch(error => {console.error(error)});
+    if (message === '') {
+      alert("enter a valid message");
+    } else {
+
+      console.log("post added: " + message);
+      const post = { message: message, author: KeyCloakService.GetUserName(), date: '2021-03-01', likes: '0' };
+      console.log(post);
+      //axios.post('https://localhost:7237/api/posts', post).then(response => {console.log(response)}).catch(error => {console.error(error)});
+      axios.post('http://35.205.199.107/api/posts', post).then(response => { console.log(response) }).catch(error => { console.error(error) });
+    }
     // //axios.post('http://twitterbutcooler.com/api/posts', post).then(response => {console.log(response)}).catch(error => {console.error(error)});
     // console.log("post added: " + message);
   }
-  
+
   return (
     <div className='FormContainer'>
       <head>
@@ -25,14 +32,16 @@ function NewPostPage() {
       <form className='Form'>
         <div className="form-group">
           <label for="exampleInputEmail1"></label>
-          <input onChange={(e) => setMessage(e.target.value)}  className="form-control"  placeholder="What's on your mind?" />
+          <input onChange={(e) => setMessage(e.target.value)} className="form-control" placeholder="What's on your mind?" />
           <small id="emailHelp" className="form-text text-muted">Leave a message for your followers.</small>
         </div>
+        <button onClick={() => addPost()} className="btn btn-primary">Submit</button>
       </form>
-        <button  onClick={() => addPost()} type="submit" className="btn btn-primary">Submit</button>
     </div>
   );
 }
 
+// KeyCloakService.CallLogin(NewPostPage);
 
- export default NewPostPage;
+
+export default NewPostPage;
