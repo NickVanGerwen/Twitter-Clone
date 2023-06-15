@@ -22,4 +22,4 @@ jobs:
         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 
     - name: Run Trivy Scan
-      run: trivy image nickvgdev/twitter-fetch-service
+      run: trivy image nickvgdev/twitter-post-service
